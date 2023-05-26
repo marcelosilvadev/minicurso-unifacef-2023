@@ -1,3 +1,21 @@
+var dotenv = require("dotenv");
+
+let path;
+switch (process.env.NODE_ENV) {
+  case "test":
+    path = `${__dirname}/../.env.test`;
+    break;
+  case "debug":
+    path = `${__dirname}/../.env.debug`;
+    break;
+  case "development":
+    path = `${__dirname}/../.env.development`;
+    break;
+  default:
+    path = `${__dirname}/../.env.development`;
+}
+dotenv.config({path: path});
+
 const environment = {
   application: {
     name: process.env.APPLICATION_NAME || 'node-jest-jwt',
