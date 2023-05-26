@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# script/test: Run test suite for application. Optionally pass in a path to an
+#              individual test file to run a single test.
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+[ -z "$DEBUG" ] || set -x
+
+echo "===> Running linter..."
+
+npm run lint | ./node_modules/.bin/snazzy
+
+export NODE_ENV="test"
+
+echo "===> Running tests..."
+
+./node_modules/jest/bin/jest.js -c ./jest.config.js --passWithNoTests --detectOpenHandles --runInBand --forceExit
