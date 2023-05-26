@@ -1,5 +1,6 @@
 const Business = require("../../common/business");
 const AddressServices = require("./address.services");
+const {addressResponse} = require("./address.serializable")
 
 class AddressBusiness extends Business {
   constructor() {
@@ -12,7 +13,7 @@ class AddressBusiness extends Business {
     if (!address || address.erro) {
       return
     }
-    return this.envelope(address)
+    return this.envelope(addressResponse(address))
   }
 }
 
