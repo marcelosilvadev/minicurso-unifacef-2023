@@ -9,6 +9,7 @@ const environment = require('../config/environment');
 const errorHandler = require('./errorHandler');
 const health = require('../src/health/health.routes')
 const masterRouterV1 = require('./middlewares/v1/masterRouter')
+const tokenMiddleware = require('./middlewares/token')
 
 const _app = express();
 
@@ -17,6 +18,7 @@ function _init() {
     try {
       _app.use(cors());
       _app.use(express.json());
+      _app.use(tokenMiddleware)
 
       _app.use('/health', health);
       _app.use('/api/v1', masterRouterV1);
@@ -42,7 +44,7 @@ function initDb() {
   } = environment.db
 
   let url = `mongodb+srv://${username}:${encodeURIComponent(password)}@${host}/${name}?retryWrites=true&w=majority`
-  
+
   return mongoose.connect(url);
 }
 

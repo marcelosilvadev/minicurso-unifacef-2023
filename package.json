@@ -19,6 +19,7 @@
     "http-status": "^1.6.2",
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
+    "majestic": "^1.8.1",
     "mongoose": "^7.2.1",
     "uuid": "^9.0.0"
   },

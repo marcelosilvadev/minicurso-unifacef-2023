@@ -7,12 +7,14 @@ const {
 const {
   postUserSchema,
   putUserSchema
-} = require("./user.schema")
+} = require("./user.schema");
+const authorize = require("../../server/middlewares/authorize");
 
 const userController = new UserController();
 
 router.post(
   "/",
+  authorize("admin", "create_user"),
   validateSchema(postUserSchema, schemaType.BODY),
   userController.create()
 )
